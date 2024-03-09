@@ -1,0 +1,80 @@
+Topics for exam 1 for 314, Fall 2019
+
+    This exam may require knowledge of any subjects that were on the
+    topic list for exam 0, but there will not be questions whose main
+    purpose is to test your knowledge of those subjects.
+
+	
+	
+	Topics from Exam0:
+      Formal Languages
+	    Grammars 
+			parsing, derivation
+			ambiguity and removing ambiguity: precedence, associativity
+			regular grammars and context free grammars
+		BNF and Extended BNF (EBNF)
+	    Regular Expressions (REs)
+	        is this string in the language defined by this RE?
+			write an RE that defines this language
+	    Finite State Automata (FAs)
+	    	deterministic and nondeterministic
+			is this string accepted by this FA?
+			draw an FA that accepts this language
+		Languages for which there is no FA / RE
+		
+		Functional Programming & Scheme
+			shallow and deep recursion on lists		   
+			lambda and closures
+				functions that take functions as arguments
+	        e.g., apply, map, foldr, etc.
+
+	>> Additionally - untested topics that may be on the final:
+       	Accumulator recursion and tail recursion 
+	    Functions that return functions
+	    	functions that encapsulate patterns
+	    Functions inside of data structures 
+		Scheme macros
+		Lazy evaluation
+
+		
+    Topics from Exam 1:
+		Logical ("declarative") meaning of prolog code
+		Basic operation of Prolog:
+			Matching
+			Backward chaining
+			Backtracking
+		Prolog programming
+			Ordering goals & clauses
+			Numbers, is
+			Recursion
+			Lists
+			Implementing data structures with functors
+			Implementing data structures with lists
+			Cut 
+			Derivation trees
+			 (tracing evaluation and unification)
+	>> Expert Systems and Metainterpretters will not be on the final.
+
+
+	Topics new for Exam2:
+		Common features of Scripting and Dynamic Languages
+		Python
+			indentation-based syntax
+			ifs, loops, range
+			slicing
+			list comprehensions
+			how to use object-oriented features
+			how to use functional features
+				lambdas
+				map/reduce/filter
+			iterable data structures
+			loops on iterables
+			
+	
+
+
+
+	
+	
+	
+	

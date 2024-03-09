@@ -1,0 +1,12 @@
+
+Project 1 Extra:
+	For extra credit, solve the list length problem detailed in class. For the following definition:
+	
+lstlength([], SIZE):- SIZE is 0.
+lstlength([_|T], SIZE):- lstlength(T, SMALLER), SIZE is SMALLER+1.
+
+	.. asking Prolog to assemble a random list of a given size ("lstlength(X,3)") indicates more possible solutions, which I demonstrated runs forever.
+	
+	Solve the issue by counting the list's length using Peano Numerals. You should also write a rule to relate integers to Peano Numerals.
+
+Optionally submit your "PeanoLength.pl" on or before the due date as well.

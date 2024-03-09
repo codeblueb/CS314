@@ -1,0 +1,26 @@
+Trace of two calls to append
+
+definition of append:
+   append([  ], A, A).			% clause 1			
+   append([F | R], B, [F | C]):- 	% clause 2
+			append(R,B,C).
+
+:- append([y], [z], T).  % first example call
+Does not match clause 1
+matches clause 2
+    with F = y, R = [ ], B = [z], T = [F | C] = [y | C]
+        subgoal append ([ ], [z], C)
+        matches clause 1 with  [z] = A = C, T = [y | [z] ] = [y, z]
+result:  T = [y, z]
+
+:- append([x, y], [z], T).  % second example call
+Does not match clause 1
+matches clause 2
+    with F = x, R = [y], B = [z], T = [F | C] = [x | C]
+       subgoal append([y], [z], C )
+       does not match clause 1
+       matches clause 2 append([F' | R'], B', [F' | C']):- append(R', B', C')
+           with F' = y, R' = [ ], B' = [z], C = [ y | C' ], T = [x, y | C']
+               subgoal append([ ], [z], C')
+               matches clause 1 with C' =  A = [z], T = [x, y | [z] ] = [x, y, z]
+result:  T = [x, y, z] 

@@ -1,0 +1,29 @@
+Topics for exam 1 for 314, Fall 2019
+
+    This exam may require knowledge of any subjects that were on the
+    topic list for exam 0, but there will not be questions whose main
+    purpose is to test your knowledge of those subjects.
+
+    Prolog
+	Logical ("declarative") meaning of prolog code
+	Basic operation of Prolog:
+	     Matching
+	     Backward chaining
+	     Backtracking
+      Prolog programming
+	     Ordering goals & clauses
+	     Numbers, is
+	     Recursion
+	     Lists
+	     Implementing data structures with functors
+		 Implementing data structures with lists
+	     Cut 
+	     Derivation trees
+
+*** Expert Systems and Metainterpretters will not be on
+*** exam 2 but may be on the final.
+
+Topics not covered in lecture => not on the exam.
+However, topics not on practice-exams MAY still be on the exam.
+
+

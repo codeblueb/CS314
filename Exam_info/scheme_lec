@@ -1,0 +1,44 @@
+listSum( node(3, node(2, [])), Sum). ... bind Sum to 5...
+
+
+listSum( node( A , []) , A).
+listSum( node( X, Y), Sum ) :- listSum( Y , Sum0), Sum is Sum0 + X.
+
+
+[ 3 [ 2 ]]
+listSum( [ H | [] ], H ).
+listSum( [H | T], Sum) :- listSum( T, Sum0), Sum is Sum0+H.
+
+
+'(3 (2) )
+(define listSum
+	(lambda (lst)
+		(if (null? (cdr lst))
+			(car lst)
+			(+ (listSum (cadr lst)) (car lst)  )
+		)
+	)
+)
+
+
+;;node(3, node(2, []))
+
+;;node(2, [])
+
+
+( (lambda (head tail lstFn) (lstFn head tail)) 2 '() listSum)
+
+(lambda (x y z)
+ .....
+ )
+ 	
+		
+
+(define listSum
+	(lambda (head tail)
+		(if (and (not (procedure? tail)) (eq? tail '()) )
+			head
+			(+ (tail listSum) head)
+	)
+	)
+	)

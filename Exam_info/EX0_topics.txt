@@ -1,0 +1,34 @@
+Topics for Exam0:
+      Formal Languages
+	    Grammars 
+			parsing, derivation
+			ambiguity and removing ambiguity: precedence, associativity
+			regular grammars and context free grammars
+		BNF and Extended BNF (EBNF)
+	    Regular Expressions (REs)
+	        is this string in the language defined by this RE?
+			write an RE that defines this language
+	    Finite State Automata (FAs)
+	    	deterministic and nondeterministic
+			is this string accepted by this FA?
+			draw an FA that accepts this language
+		Languages for which there is no FA / RE
+		Functional Programming & Scheme
+			shallow and deep recursion on lists		   
+			lambda and closures
+				functions that take functions as arguments
+	        e.g., apply, map, foldr, etc.
+
+I may ask about any topic listed above, even if the topic is not on
+the practice exam.
+
+Not on this exam:
+
+       	    accumulator recursion and tail recursion // 
+	    functions that return functions 	      	     //    "
+	    	e.g., null-safe, compose, etc 		     //    "
+	    	encapsulating patterns 	  		   //     "
+
+	    functions inside of data structures 
+	   scheme macros
+	   lazy evaluation

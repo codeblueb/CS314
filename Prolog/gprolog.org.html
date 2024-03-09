@@ -1,0 +1,403 @@
+<!DOCTYPE html 
+      PUBLIC "-//W3C//DTD HTML 4.01//EN"
+      "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en-US">
+<head profile="http://www.w3.org/2005/10/profile">
+
+  <link rel="icon" type="image/x-icon" href="gprolog.ico">
+  <link rel="short icon" type="image/x-icon" href="gprolog.ico">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+  <meta name="Author" content="Daniel Diaz">
+
+  <meta name="Keywords" content="GNU Prolog, Prolog, compiler, constraints, finite domains">
+
+  <meta name="GENERATOR" content="Mozilla/4.78 [en] (X11; U; Linux 2.4.9-34 i686) [Netscape]"><title>The GNU Prolog web site</title>
+
+
+  <meta name="robots" content="all">
+
+
+<script type="text/javascript">	
+	a=document.getElementsByTagName("head")
+	a=a[0]
+	z=document.createElement("link")
+	z.rel="icon"
+	z.type="image/x-icon"
+	z.href="gprolog.ico"
+	a.appendChild(z)
+</script>
+
+</head>
+
+
+<body alink="#ff0000" bgcolor="#ffffff" link="#0000ef" text="#000000" vlink="#51188e">
+
+<center>
+<h1> The GNU Prolog web site</h1>
+</center>
+
+<center> <a href="http://www.ohloh.net/p/gprolog"><img src="gprolog.png" alt="The GNU Prolog logo" width="100" height="100"></a> </center>
+
+<center><i><font size="+2">Current stable version is gprolog-1.4.5</font></i></center>
+
+
+<h1> <a name="TOChead"></a><font size="+2">Table of contents</font></h1>
+
+<ul>
+       <li> <a href="#whatis">What is GNU Prolog ?</a></li>
+       <li> <a href="#feature">Features</a></li>
+       <li> <a href="#howdoes">How does GNU Prolog work ?</a></li>
+       <li> <a href="#history">History</a></li>
+       <li> <a href="#platform">Supported Platforms &amp; last changes</a></li>
+       <li> <a href="#manual">Manual</a></li>
+       <li> <a href="#download">Download</a></li>
+       <li> <a href="#contribs">Contributions and related developments</a></li>
+       <li> <a href="#maillist">Mailing lists</a></li>
+       <li> <a href="#bug">Reporting bugs</a></li>
+
+</ul>
+
+<hr width="100%">
+<h1> <a name="whatis"></a><font size="+2"><a href="#TOChead">What is GNU Prolog</a></font></h1>
+
+<blockquote>GNU Prolog is a free Prolog compiler with constraint solving
+over finite domains developed by <a href="http://crinfo.univ-paris1.fr/users/diaz/">Daniel  Diaz</a>.</blockquote>
+
+<blockquote>GNU Prolog accepts Prolog+constraint programs and produces native
+  binaries (like gcc does from a C source). The obtained executable is then
+  stand-alone. The size of this executable can be quite small since GNU Prolog
+  can avoid to link the code of most unused built-in predicates. The performances
+  of GNU Prolog are very encouraging (comparable to commercial systems).
+
+  <p>Beside the native-code compilation, GNU Prolog offers a classical interactive
+   interpreter (top-level) with a debugger. </p>
+
+  <p>The Prolog part conforms to the ISO standard for Prolog with many
+  extensions very useful in practice (global variables, OS interface,
+  sockets,...). </p>
+
+  <p>GNU Prolog also includes an efficient constraint solver over Finite
+Domains (FD). This opens contraint logic programming to the user combining
+the power of constraint programming to the declarativity of logic programming.</p>
+     </blockquote>
+
+<h1> <a name="feature"></a><font size="+2"><a href="#TOChead">Features</a></font></h1>
+
+<blockquote> <li> Prolog system:</li>
+
+  <ul>
+      <li> conforms to the ISO standard for Prolog (floating point numbers,
+ streams,  dynamic code,...).</li>
+       <li> a lot of extensions: global variables, definite clause grammars
+ (DCG),  sockets interface, operating system interface,...</li>
+       <li> more than 300 Prolog built-in predicates.</li>
+       <li> Prolog debugger and a low-level WAM debugger.</li>
+       <li> line editing facility under the interactive interpreter with
+completion    on atoms.</li>
+       <li> powerful bidirectional interface between Prolog and C.</li>
+
+  </ul>
+       <li> Compiler:</li>
+
+  <ul>
+      <li> native-code compiler producing stand alone executables.</li>
+       <li> simple command-line compiler accepting a wide variety of files:
+ Prolog  files, C files, WAM files,...</li>
+       <li> direct generation of assembly code 15 times faster than wamcc
++  gcc.</li>
+       <li> most of unused built-in predicates are not linked (to reduce
+the   size of the executables).</li>
+       <li> compiled predicates (native-code) as fast as wamcc on average.</li>
+       <li> consulted predicates (byte-code) 5 times faster than wamcc.</li>
+
+  </ul>
+       <li> Constraint solver:</li>
+
+  <ul>
+      <li> FD variables well integrated into the Prolog environment (full
+compatibility   with Prolog variables and integers). No need for explicit
+FD declarations.</li>
+       <li> very efficient FD solver (comparable to commercial solvers).</li>
+       <li> high-level constraints can be described in terms of simple primitives.</li>
+       <li> a lot of predefined constraints: arithmetic constraints, boolean
+  constraints,  symbolic constraints, reified constraints,...</li>
+       <li> several predefined enumeration heuristics.</li>
+       <li> the user can define his own new constraints.</li>
+       <li> more than 50 FD built-in constraints/predicates.</li>
+
+  </ul>
+      </blockquote>
+
+<h1> <a name="howdoes"></a><font size="+2"><a href="#TOChead">How does GNU
+  Prolog work ?</a></font></h1>
+
+<blockquote>The GNU Prolog compiler is based on the Warren Abstract Machine
+   (WAM). It first compiles a Prolog program to a WAM file which is then
+translated    to a low-level machine independent language called mini-assembly
+specifically    designed for GNU Prolog. The resulting file is then translated
+to the assembly    language of the target machine (from which an object is
+obtained). This  allows GNU Prolog to produce a native stand alone executable
+from a Prolog  source (similarly to what does a C compiler from a C program).
+The main advantage   of this compilation scheme is to produce native code
+and to be fast. Another   interesting feature is that executables are small.
+Indeed, the code of most   unused built-in predicates can be excluded from
+the executables at link-time.
+  <p>GNU Prolog also includes an efficient constraint solver over Finite
+Domains (FD). The key feature of the GNU Prolog solver is the use of a single
+(low-level) primitive to define all (high-level) FD constraints. There are
+many advantages of this approach: constraints can be compiled, the user can
+define his own constraints (in terms of the primitive), the solver is open
+and extensible (as opposed to black-box solvers like CHIP),...Moreover, the
+GNU Prolog solver is rather efficient, often more than commercial solvers.</p>
+     </blockquote>
+
+<h1> <a name="history"></a><font size="+2"><a href="#TOChead">History</a></font></h1>
+
+<blockquote>GNU Prolog is inspired by two systems developed by the same author:
+
+  <ul>
+      <li> <tt>wamcc</tt>: a Prolog to C compiler. the key point of wamcc
+was   its ability to produce stand alone executables using an original compilation
+   scheme: the translation of Prolog to C via the WAM. Its drawback was the
+  time needed by gcc to compile the produced sources. GNU Prolog can also
+produce  standalone executables but using a faster compilation scheme.</li>
+
+  </ul>
+      </blockquote>
+
+<blockquote>
+  <ul>
+      <li> <tt>clp(FD)</tt>: a constraint programming language over FD. Its
+ key  feature was the use of a single primitive to define FD constraints.
+GNU Prolog  is based on the same idea but extends the power of primitive to
+make it possible more complex constraint definitions. In comparison to clp(FD),
+GNU Prolog offers new predefined constraints, new predefined heuristics, reified
+constraints,...</li>
+
+  </ul>
+      The development of GNU Prolog started in January 1996 under the name
+ Calypso.</blockquote>
+
+<h1> <a name="platform"></a><font size="+2"><a href="#TOChead">Supported Platforms
+&amp; Last Changes</a></font></h1>
+
+<blockquote>Currently the following architectures are supported:
+
+  <ul>
+       <li> ix86 / GNU/Linux</li>
+       <li> ix86 / Win32 using Cygwin (see file src/WINDOWS)</li>
+       <li> ix86 / Win32 using MinGW  (see file src/WINDOWS)</li>
+       <li> ix86 / Win32 using MSVC++ (see file src/WINDOWS)</li>
+       <li> ix86 / SCO</li>
+       <li> ix86 / Solaris</li>
+       <li> ix86 / FreeBSD</li>
+       <li> ix86 / OpenBSD</li>
+       <li> ix86 / NetBSD</li>
+       <li> ix86 / Darwin (Mac OS X)</li>
+       <li> x86_64 / GNU/Linux</li>
+       <li> x86_64 / Solaris</li>
+       <li> x86_64 / Win64 using MinGW64  (see file src/WINDOWS64)</li>
+       <li> x86_64 / Win64 using MSVC++ (see file src/WINDOWS64)</li>
+       <li> x86_64 / Darwin (Mac OS X)</li>
+       <li> PowerPC / GNU/Linux</li>
+       <li> PowerPC / Darwin (Mac OS X)</li>
+       <li> PowerPC / NetBSD</li>
+       <li> sparc / SunOS (4.1.3 or higher)</li>
+       <li> sparc / Solaris</li>
+       <li> sparc / NetBSD</li>
+       <li> alpha / GNU/Linux</li>
+       <li> alpha / OSF1</li>
+       <li> mips / irix</li>
+
+  </ul>
+      If you are interested in porting GNU Prolog to another architecture
+read   the PORTING file in src.
+  <p>You can consult the following files: </p>
+
+  <ul>
+      <li> the general <a href="README">README</a> file.</li>
+       <li> the <a href="NEWS">NEWS</a> file.</li>
+       <li> the <a href="ChangeLog">ChangeLog</a> file.</li>
+
+  </ul>
+      </blockquote>
+
+<h1> <a name="manual"></a><font size="+2"><a href="#TOChead">Manual</a></font></h1>
+
+<blockquote>This manual is available in the following formats:
+
+  <ul>
+      <li> <a href="manual/gprolog.html"> HTML</a> entirely on one web page</li>
+      <li> <a href="manual/html_node/index.html"> HTML</a> with one web page per chapter</li>
+      <li> <a href="manual/gprolog.html.tar.gz"> HTML compressed</a> entirely on one web page (gzipped tar file)</li>
+      <li> <a href="manual/gprolog.html_node.tar.gz"> HTML compressed</a> with one web page per chapter (gzipped tar file)</li>
+      <li> <a href="manual/gprolog.pdf">PDF</a></li>
+      <li> <a href="manual/gprolog.ps">PostScript</a></li>
+      <li> <a href="manual/gprolog.chm">Microsoft HTMLHelp (chm) version</a></li>
+      <li> <a href="manual/gprolog.dvi.tar.gz">TeX dvi</a> (gzipped tar file)</li>
+  </ul>
+      </blockquote>
+
+<h1> <a name="download"></a><font size="+2"><a href="#TOChead">Download</a></font></h1>
+
+<blockquote>We provide both source and binary distributions for GNU Prolog.
+
+  <p>Source distributions: </p>
+
+  <ul>
+      
+       <li> the main source distribution <a href="gprolog-1.4.5.tar.gz">gprolog-1.4.5.tar.gz</a>.</li>
+
+  </ul>
+      Binary distributions:
+  <ul><li><a href="gprolog-1.4.5.pkg.zip">Mac OS X High Sierra installer package</a> (created using MacPorts by Paulo Moura: installs GNU Prolog in /opt/local/ and /opt/local/bin).<br>
+      <br>
+</li>
+      <li><a href="setup-gprolog-1.4.5-msvc-x86.exe">Windows intel 32 bits auto-install setup</a> (compiled under ix86 / Windows 7 with MSVC++).</li>
+      <li><a href="setup-gprolog-1.4.5-mingw-x86.exe">Windows intel 32 bits auto-install setup</a> (compiled under ix86 / Windows 7 with MinGW gcc under MSys).<br>
+      <br>
+</li>
+    <li><a href="setup-gprolog-1.4.5-msvc-x64.exe">Windows intel 64 bits auto-install setup</a> (compiled under x86_64 / Windows 7 with MSVC++).</li>
+    <li><a href="setup-gprolog-1.4.5-mingw-x64.exe">Windows intel 64 bits auto-install setup</a> (compiled under x86_64 / Windows 7 with MinGW64 gcc under Cygwin).</li>
+
+
+  </ul>
+      Other versions:
+  <ul>
+      <li> Old versions can be found <a href="old_versions">in
+   this directory</a>.</li>
+       <li> Unstable versions can be found <a href="unstable">in
+   this directory</a>.</li>
+
+  </ul>
+      Some of these files can also be downloaded from the primary <a href="ftp://ftp.gnu.org/gnu/gprolog/">GNU ftp site</a> or from any <a href="http://ftpmirror.gnu.org/">mirror</a>.<br>
+  <br>
+The <a href="https://sourceforge.net/p/gprolog/code/ci/457f7b447c2b9e90a09956ff15fd277d269b1d98/tree/">GIT repository</a> is hosted by sourceforge.<br><br>
+
+For windows users, a Notepad++ User Defined Lanuage
+(UDL) <a href="userDefineLang-GNU_Prolog.xml">profile file for GNU Prolog</a> (also
+available from the
+<a href="http://notepad-plus.sourceforge.net/commun/userDefinedLang/userDefineLang-GNU_Prolog.xml">Notepad++
+wiki about UDL</a>). To install: launch Notepad++, in the "Language" menu,
+chose "Define your own language", click on "Import" and select the downloaded .xml
+file. Then close and restart Notepad++. Files suffixed with ".pl" and ".pro" should
+be now recognized as Prolog files (else select "Prolog (GNU)" from the "Languages"
+menu). For more information see
+the <a href="https://sourceforge.net/apps/mediawiki/notepad-plus/index.php?title=User_Defined_Language_Files#How_to_install_user_defined_language_files">Notepad++
+wiki</a>.
+
+<br><br>
+
+GNU Prolog is present on the <a href="http://www.ohloh.net/p/gprolog">Ohloh site</a>.<br>
+
+</blockquote>
+
+<h1> <a name="contribs"></a><font size="+2"><a href="#TOChead">Contributions
+  and related developments</a></font></h1>
+
+<blockquote>Contributions are welcome. If you want to include your contribution
+   please post a mail to <a href="mailto:users-prolog@gnu.org">users-prolog@gnu.org</a>
+   (for more information on this list <a href="#users-list-usage">click here</a>).
+   Here is a list of available contributions:</blockquote>
+
+<blockquote>
+  <ul>
+       <li> <a href="http://bedevere.sourceforge.net">Bedevere</a> -  a SWIG wrapper</li>
+       <li> <a href="http://interval.sourceforge.net/interval/index.html">CLIP</a> - a
+CLP(Intervals) interpreter</li>
+       <li><a href="http://contraintes.inria.fr/%7Efages/CLPGUI/">CLPGUI</a>
+- a graphical user interface for CLP </li>
+       <li> <a href="http://www.complang.tuwien.ac.at/cti/">cTI</a> - a constrained-based
+   left Termination Inference tool for ISO-Prolog</li>
+       <li> <a href="http://www.di.uevora.pt/gprolog-cx/">GNU Prolog/CX</a> - an extension of GNU Prolog for Contextual Logic Programming</li>
+       <li> <a href="https://github.com/emacstheviking/gnuprolog-json">gnuprolog-json</a> - a GNU Prolog JSON library</li>
+       <li> <a href="https://github.com/emacstheviking/gnuprolog-redisclient/" target="_blank">gnuprolog-redisclient</a> - a GNU Prolog redis client</li>
+       <li> <a href="http://contraintes.inria.fr/%7Ehaemmerl/gprolog-rh/">gprolog-rh</a>
+- an extension of gprolog with attributed variables, coroutinings and CLP
+over reals</li>
+       <li> <a href="http://www.logtalk.org">Logtalk</a> - Object Oriented
+extension to Prolog</li>
+       <li> <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/gprolog/contribs/gplpcsc/">Muscle
+   PS/SC</a> - an interface to the Muscle PC/SC library</li>
+       <li> <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/gprolog/contribs/gplmysql/">MySQL/Prolog</a>
+   - an interface to MySQL database</li>
+       <li> <a href="mailto:leopold_the_cat@yahoo.com">ODBC/Prolog</a> -
+a  small  ODBC interface module for gprolog</li>
+       <li> <a href="http://xgp.sourceforge.net/">XGP</a> - a Mac OS X IDE
+ connecting gprolog and Cocoa</li>
+       <li> <a href="http://enufs.net/cgi_development_with_GNU-Prolog/introduction.html">CGI programming</a> - an introduction to CGI-Programming with GNU-Prolog</li>
+
+  </ul>
+      </blockquote>
+
+<h1> <a name="maillist"></a><font size="+2"><a href="#TOChead">Mailing lists</a></font></h1>
+
+<blockquote><a name="users-list-usage"></a>The mailing list <a href="mailto:users-prolog@gnu.org">users-prolog@gnu.org</a>: is for communicating
+  with other GNU Prolog users and/or implementors:</blockquote>
+
+<blockquote>
+  <ul>
+      <li> To inform other uses send a mail to <a href="mailto:users-prolog@gnu.org">users-prolog@gnu.org</a>.</li>
+       <li> To (un)subscribe to this list send a mail to <a href="mailto:users-prolog-request@gnu.org">users-prolog-request@gnu.org</a>
+   with (un)subscribe in the subject line.</li>
+       <li> You can also (un)subscribe via the web at <a href="http://mail.gnu.org/mailman/listinfo/users-prolog">http://mail.gnu.org/mailman/listinfo/users-prolog</a>.</li>
+       <li> From the same site you can also <a href="http://mail.gnu.org/pipermail/users-prolog/">browse the archive</a>.</li>
+
+  </ul>
+      <a name="bug-list-usage"></a>The mailing list <a href="mailto:bug-prolog@gnu.org">bug-prolog@gnu.org</a>: is for reporting
+  bugs:
+  <blockquote> <li> To inform other uses send a mail to <a href="mailto:bug-prolog@gnu.org">bug-prolog@gnu.org</a>.</li>
+       <li> To (un)subscribe to this list send a mail to <a href="mailto:bug-prolog-request@gnu.org">bug-prolog-request@gnu.org</a>
+with (un)subscribe in the subject line.</li>
+       <li> You can also (un)subscribe via the web at <a href="http://mail.gnu.org/mailman/listinfo/bug-prolog">http://mail.gnu.org/mailman/listinfo/bug-prolog</a>.</li>
+       <br>
+     From the same site you can also <a href="http://mail.gnu.org/pipermail/bug-prolog/">browse the archive</a>.</blockquote>
+      </blockquote>
+
+<h1> <a name="bug"></a><font size="+2"><a href="#TOChead">Reporting Bugs</a></font></h1>
+
+<blockquote>Bug reports are crucial for our work. If we don't know about
+problems, we cannot fix them. On the other hand it is a waste of time to
+read/check/answer for bugs which are not bugs ! Please consult the manual
+(an <a href="manual/html_node/index.html">on-line version</a> is available). If you
+can try to check if the bug occurs with the last unstable version (<a href="unstable">all
+   unstable versions are here</a>). If you already use the last unstable
+version    try <a href="gprolog-1.4.5.tar.gz">the
+   last stable version</a>. When you are sure you have discovered a bug,
+please    report it to <a href="mailto:bug-prolog@gnu.org">bug-prolog@gnu.org</a>
+ (for more information on this list <a href="#bug-list-usage">click here</a>).
+
+  <p>Your report should include all these things: </p>
+
+  <ul>
+      <li> The type of machine you are using (use uname -a under Unix).</li>
+       <li> GNU Prolog version (use gprolog --version).</li>
+       <li> The operands given to the `configure' and the output of the configuration
+   if the bug concerns the compilation/installation phase.</li>
+       <li> The complete text of any files needed to reproduce the bug. Try
+ to  obtain a minimal example showing the bug.</li>
+       <li> The precise commands we need to type to reproduce the bug.</li>
+       <li> A description of what behavior you observe that you believe is
+ incorrect.</li>
+       <li> If you wish to mention something in the GNU Prolog source, show
+ the  line of code with a few lines of context.&nbsp; Do not just give a line
+ number.</li>
+
+  </ul>
+      </blockquote>
+
+<p><br>
+      </p>
+
+<hr width="100%"> <br>
+     Copyright (C) 1999-2018 Daniel Diaz
+<p>Verbatim copying and distribution of this entire article is permitted
+in any medium, provided this notice is preserved. <br>
+     &nbsp; </p>
+     <br>
+
+
+
+</body></html>
